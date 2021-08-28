@@ -21,8 +21,10 @@ namespace HomeWork3_10
 
             Console.Write("1-й игрок представьтесь: "); string gamer1 = Console.ReadLine(); //ввод своего имени первым игроком
             Console.Write("2-й игрок представьтесь: "); string gamer2 = Console.ReadLine(); //ввод своего имени вторым игроком
+            Console.WriteLine(); //переход на следующую строку
 
-            int userTry, gameNumber;
+            int userTry;
+            int gameNumber;
             string revansh = "да"; //переменная для возможного реванша
             string winner = ""; //переменная для имени победителя
             while (revansh == "да") //проверка согласия на реванш
@@ -30,37 +32,48 @@ namespace HomeWork3_10
                 gameNumber = rand.Next(12, 121); //случайное число от 12 до 120
                 for (; ; ) //запуск бесконечного цикла
                 {
-                    Console.Write($"{gamer1} введите число: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа первым игроком    
-                    if (userTry != 4) //если введенное число не равно четырем, то выполнить...
+                    userTry = 0; //перед вводом числа выполнить условие для цикла ниже
+                    while (userTry < 1 || userTry > 4) //пока введенное число меньше 1 или болше 4, повторять ввод числа
+                    {
+                        Console.Write($"{gamer1} введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа первым игроком 
+                    }
+                    while (userTry > gameNumber && userTry == 4) //пока введенное число больше оставшегося gameNumber и равно четырем, повторять ввод числа
+                    {
+                        Console.Write($"{gamer1} введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 первым игроком 
+                    }
+                    if (userTry <= gameNumber) //если введенное число меньше или равно оставшегося gameNumber, то выполнить...
                     {
                         gameNumber -= userTry; //вычитание userTry из gameNumber
                         Console.WriteLine($"Оставшееся число: {gameNumber}"); //вывод оставшегося числа
                         if (gameNumber == 0) //если разность равна нулю, то...
                         {
-                            Console.WriteLine($"Поздравляем {gamer1} с победой!!!"); //поздравить игрока
+                            Console.WriteLine($"Поздравляем {gamer1} с победой!!!"); //поздравление первого игрока
                             winner = gamer1; //переменная для вывода имени победителя
                             break; //выход из цикла for
                         }
                     }
-                    else //если введенное число равно четырем, то переход хода другому игроку
+                    userTry = 0;  //перед вводом числа выполнить условие для цикла ниже
+                    while (userTry < 1 || userTry > 4) //пока введенное число меньше 1 или болше 4, повторять ввод числа
                     {
-                        Console.WriteLine("\nЧисло 'четыре' вводить нельзя по правилам игры. Переход хода."); //предупреждение о нарушении правил
-                        //далее аналогично предыдущему игроку
-                        Console.Write($"{gamer2} введите число: "); userTry = int.Parse(Console.ReadLine());
-                        if (userTry != 4)
+                        Console.Write($"{gamer2} введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа вторым игроком 
+                    }
+                    while (userTry > gameNumber && userTry == 4) //пока введенное число больше оставшегося gameNumber и равно четырем, повторять ввод числа
+                    {
+                        Console.Write($"{gamer2} введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 вторым игроком 
+                    }
+                    if (userTry <= gameNumber) //если введенное число меньше или равно оставшегося gameNumber, то выполнить...
+                    {
+                        gameNumber -= userTry; //вычитание userTry из gameNumber
+                        Console.WriteLine($"Оставшееся число: {gameNumber}"); //вывод оставшегося числа
+                        if (gameNumber == 0) //если разность равна нулю, то...
                         {
-                            gameNumber -= userTry;
-                            Console.WriteLine($"Оставшееся число: {gameNumber}");
-                            if (gameNumber == 0)
-                            {
-                                Console.WriteLine($"Поздравляем {gamer2} с победой!!!");
-                                winner = gamer2;
-                                break;
-                            }
-                        } else Console.WriteLine("\nЧисло 'четыре' вводить нельзя по правилам игры. Переход хода.");
-                    }       
+                            Console.WriteLine($"Поздравляем {gamer2} с победой!!!"); //поздравление второго игрока
+                            winner = gamer2; //переменная для вывода имени победителя
+                            break; //выход из цикла for
+                        }
+                    }
                 }
-                //предложение победителю о реванше, если 'да' то продолжить цикл while, если 'нет' - закончить игру
+                //предложение победителю о реванше, если 'да' то продолжить цикл while(revansh), если 'нет' - закончить игру
                 Console.Write($"{winner}, Вы согласны на реванш? введите 'да' или 'нет': "); revansh = Console.ReadLine();
             }
         }
