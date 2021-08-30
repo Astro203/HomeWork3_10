@@ -7,21 +7,23 @@ namespace HomeWork3_10
         static void Main(string[] args)
         {
 
-            /*Задание 1. Создание игры на 2 игрока
-             * 
-             * Правила:
-             * Загадывается число от 12 до 120, причем случайным образом. Назовем его gameNumber.
-             * Игроки по очереди выбирают число от одного до четырех. Пусть это число обозначается как userTry.
-             * userTry после каждого хода вычитается из gameNumber, а само gameNumber выводится на экран.
-             * Если после хода игрока gameNumber равняется нулю, то походивший игрок объявляется победителем.
-             * Число "четыре" вводить нельзя.
-             */
+            //Задание 1. Создание игры на 2 игрока
+
+            Console.ForegroundColor = ConsoleColor.Green; //Цвет текста выводимый далее в консоль зеленый
+            Console.WriteLine("Правила игры:");
+            Console.WriteLine("Загадывается число от 12 до 120, причем случайным образом. Назовем его gameNumber.");
+            Console.WriteLine("Игроки по очереди выбирают число от одного до четырех. Пусть это число обозначается как userTry.");
+            Console.WriteLine("userTry после каждого хода вычитается из gameNumber, а само gameNumber выводится на экран.");
+            Console.WriteLine("Если после хода игрока gameNumber равняется нулю, то походивший игрок объявляется победителем.");
+            Console.WriteLine("Число четыре вводить нельзя, если userTry больше чем gameNumber");
+            Console.ResetColor(); //Сброс цвета на стандартный
+            Console.WriteLine();
 
             Random rand = new Random(); //добавление генератора случайных чисел
 
             Console.Write("1-й игрок представьтесь: "); string gamer1 = Console.ReadLine(); //ввод своего имени первым игроком
             Console.Write("2-й игрок представьтесь: "); string gamer2 = Console.ReadLine(); //ввод своего имени вторым игроком
-            Console.WriteLine(); //переход на следующую строку
+            Console.WriteLine(); //переход на строку ниже
 
             int userTry;
             int gameNumber;
@@ -35,11 +37,11 @@ namespace HomeWork3_10
                     userTry = 0; //перед вводом числа выполнить условие для цикла ниже
                     while (userTry < 1 || userTry > 4) //пока введенное число меньше 1 или болше 4, повторять ввод числа
                     {
-                        Console.Write($"{gamer1} введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа первым игроком 
+                        Console.Write($"{gamer1}, введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа первым игроком 
                     }
                     while (userTry > gameNumber && userTry == 4) //пока введенное число больше оставшегося gameNumber и равно четырем, повторять ввод числа
                     {
-                        Console.Write($"{gamer1} введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 первым игроком 
+                        Console.Write($"{gamer1}, введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 первым игроком 
                     }
                     if (userTry <= gameNumber) //если введенное число меньше или равно оставшегося gameNumber, то выполнить...
                     {
@@ -53,13 +55,13 @@ namespace HomeWork3_10
                         }
                     }
                     userTry = 0;  //перед вводом числа выполнить условие для цикла ниже
-                    while (userTry < 1 || userTry > 4) //пока введенное число меньше 1 или болше 4, повторять ввод числа
+                    while (userTry < 1 || userTry > 4) //пока введенное число меньше 1 или больше 4, повторять ввод числа
                     {
-                        Console.Write($"{gamer2} введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа вторым игроком 
+                        Console.Write($"{gamer2}, введите число от 1 до 4: "); userTry = int.Parse(Console.ReadLine()); //ввод любого целого числа вторым игроком 
                     }
                     while (userTry > gameNumber && userTry == 4) //пока введенное число больше оставшегося gameNumber и равно четырем, повторять ввод числа
                     {
-                        Console.Write($"{gamer2} введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 вторым игроком 
+                        Console.Write($"{gamer2}, введите число от 1 до 3: "); userTry = int.Parse(Console.ReadLine()); //ввод целого числа от 1 до 3 вторым игроком 
                     }
                     if (userTry <= gameNumber) //если введенное число меньше или равно оставшегося gameNumber, то выполнить...
                     {
@@ -76,6 +78,7 @@ namespace HomeWork3_10
                 //предложение победителю о реванше, если 'да' то продолжить цикл while(revansh), если 'нет' - закончить игру
                 Console.Write($"{winner}, Вы согласны на реванш? введите 'да' или 'нет': "); revansh = Console.ReadLine();
             }
+            Console.Write("Игра закончена");
         }
     }
 }
